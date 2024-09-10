@@ -2,20 +2,21 @@
     "version": 2,
     "builds": [
       {
-        "src": "server.js",
+        "src": "index.js",
         "use": "@vercel/node"
       }
     ],
     "routes": [
       {
         "src": "/api/(.*)",
-        "dest": "/server.js"
+        "dest": "/index.js"
       }
     ],
     "env": {
-      "MONGODB_URI": "your-mongodb-uri",
-      "JWT_SECRET": "your-jwt-secret",
-      "OTHER_ENV_VAR": "value"
+        "MONGO_DB_URI":"mongodb+srv://yawimalik786:7860@thcluster0.4rtqa.mongodb.net/?retryWrites=true&w=majority&appName=THCluster0",
+        "PORT":"3000",
+        "JWT_SECRET":"Hey1234"
+        
     }
   }
   
