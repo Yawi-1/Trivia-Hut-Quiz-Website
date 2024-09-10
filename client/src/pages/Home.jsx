@@ -8,7 +8,7 @@ const HomePage = () => {
       {/* Hero Section */}
       <section className="hero bg-blue-600 text-white text-center py-12 md:py-24">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4">Welcome to Trivia-Hut!</h1>
+          <h1 className="text-4xl md:text-5xl my-4 font-extrabold ">Welcome to Trivia-Hut!</h1>
           <p className="text-lg md:text-xl mb-6">Explore a variety of quizzes, enhance your knowledge, and challenge yourself!</p>
           <Link to="/quizzes">
             <button className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition duration-300">
