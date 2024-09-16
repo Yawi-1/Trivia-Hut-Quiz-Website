@@ -2,7 +2,7 @@ import Quiz from '../models/quizModels.js';
 // Create a new quiz 
 const createQuiz = async (req, res) => {
     try {
-        const { title, description, category, questions, creator } = req.body;
+        const { title, description, category, questions, creator,featured } = req.body;
 
         const newQuiz = new Quiz({
             title,
@@ -10,6 +10,7 @@ const createQuiz = async (req, res) => {
             category,
             questions,
             creator,
+            featured,
         });
 
         await newQuiz.save();

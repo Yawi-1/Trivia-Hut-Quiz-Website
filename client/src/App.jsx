@@ -16,6 +16,7 @@ import { ToastContainer } from 'react-toastify';
 import { AuthProvider } from './context/AuthContext';
 import 'react-toastify/dist/ReactToastify.css';
 import QuizPage from './pages/QuizPage';
+import Gemini from './pages/Gemini';
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/learning" element={<LearningPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/quizzes/:id" element={<QuizPage />} />
+        <Route path="/ai" element={<Gemini />} />
       
 
         {/* Admin routes with protection */}

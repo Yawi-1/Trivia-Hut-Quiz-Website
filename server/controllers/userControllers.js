@@ -87,4 +87,40 @@ const deleteUser = async (req,res)=>{
     }
 }
 
-export { registerUser, loginUser,getAllUsers,deleteUser };
+const updateUser = async (req,res)=>{
+        try {
+            const {id} = req.params;
+            const user = await User.findById(id)
+            user.role=  user.role == "admin" ? "user":"admin";
+            await user.save();
+            return res.json({
+                message: 'User updated successfully',
+                role:user.role
+            })
+        } catch (error) {
+            console.log(error)
+        }
+}
+
+const singleUser = async (req,res)=>{
+    try {
+        const {id} = req.params;
+        const user = await User.findById(id);
+        if(!user){
+            return res.json({
+                message:"User Not found",
+                success:false
+            })
+        }
+        return res.json({
+            message:"User Fetched Successfully.",
+            user:user,
+        })
+    
+    } catch (error) {
+        console.log("Error at fetching a single User:",error)
+    }
+   
+}
+
+export { registerUser, loginUser,getAllUsers,deleteUser,updateUser,singleUser };

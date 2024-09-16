@@ -4,17 +4,20 @@ import mongoose from 'mongoose';
 import cors from 'cors'
 import userRouter from './routes/userRoutes.js';
 import quizRouter from './routes/quizRoutes.js';
+import path from 'path';
 
 dotenv.config();
 const app = express();
+const _dirname = path.resolve();
 
 app.use(express.json()); 
 app.use(cors({}));
 app.use('/api/users', userRouter);
-app.use('/api/quizzes', quizRouter); // Protect quiz routes with auth middleware
+app.use('/api/quizzes', quizRouter); 
+app.use(express.static(path.join(_dirname,'/client/dist')))
 
-app.get('/', (req, res) => {
-    res.send('<h1>Hello World</h1>');
+app.get('*', (_, res) => {
+    res.sendFile(path.resolve(_dirname,"client","dist","index.html"));
 });
 
 mongoose.connect(process.env.MONGO_DB_URI)

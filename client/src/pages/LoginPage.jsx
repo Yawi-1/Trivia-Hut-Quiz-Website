@@ -4,25 +4,25 @@ import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuth } from '../context/AuthContext';
 import Layout from '../components/Layout';
+import { API_BASE_URL } from '../config/config';
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { isAuthenticated, setIsAuthenticated } = useAuth();
+  const { isAuthenticated, setIsAuthenticated ,setUser,user} = useAuth();
 
   useEffect(() => {
     if (isAuthenticated) {
       navigate('/'); // Redirect if already logged in
     }
   }, [isAuthenticated, navigate]);
-
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/users/login', { email, password });
+      const response = await axios.post(`${API_BASE_URL}/api/users/login`, { email, password });
       localStorage.setItem('token', response.data.token); // Store token
-      localStorage.setItem('role', response.data.role); // Store token
+      setUser('Login Response:',response.data)
       setIsAuthenticated(true); // Update authentication state
       toast.success('Login successful!');
       navigate('/'); // Redirect to home or dashboard

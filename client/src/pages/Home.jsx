@@ -1,8 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
-
+import axios from 'axios'
+import { API_BASE_URL } from '../config/config';
 const HomePage = () => {
+  const [featuredQuizzes,setFeaturedQuizzes] = useState([]);
+  
+  const getQuizzes = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/api/quizzes`);
+      setFeaturedQuizzes(response.data.filter((quiz,index)=>{
+        return quiz.featured;
+      })); 
+    } catch (error) {
+      console.error("Error fetching quizzes:", error);
+    }
+  };
+
+
+  useEffect(()=>{
+    getQuizzes();
+  },[])
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -44,17 +63,21 @@ const HomePage = () => {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">Featured Quizzes</h2>
           <div className="flex flex-wrap justify-center gap-8">
-            {/* Example Quiz Cards */}
-            <div className="quiz-card p-6 bg-white rounded-lg shadow-lg w-full md:w-1/3">
-              <h3 className="text-2xl font-semibold mb-4">Quiz Title</h3>
-              <p>Brief description of the quiz. Engage with this interesting quiz now!</p>
-              <Link to="/quizzes/quiz-id">
-                <button className="bg-blue-600 text-white px-4 py-2 rounded-lg mt-4 hover:bg-blue-700 transition duration-300">
-                  Start Quiz
-                </button>
-              </Link>
-            </div>
-            {/* Add more quiz cards as needed */}
+            {
+              featuredQuizzes.map((quiz,index)=>{
+                return(
+                  <div className="quiz-card p-6 bg-white rounded-lg shadow-lg w-full md:w-1/3">
+                  <h3 className="text-2xl font-semibold mb-4">{quiz.title}</h3>
+                  <p>{quiz.description}</p>
+                  <Link to={`/quizzes/${quiz._id}`}>
+                    <button className="bg-blue-600 text-white px-4 py-2 rounded-lg mt-4 hover:bg-blue-700 transition duration-300">
+                      Start Quiz
+                    </button>
+                  </Link>
+                </div>
+                )
+              })
+            }
           </div>
         </div>
       </section>

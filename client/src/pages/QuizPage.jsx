@@ -5,13 +5,14 @@ import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 
+
 const QuizPage = () => {
   const { id } = useParams();
   const [quiz, setQuiz] = useState(null);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [score, setScore] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(300); // 5 minutes in seconds
+  const [timeLeft, setTimeLeft] = useState(600); 
 
   useEffect(() => {
     const fetchQuiz = async () => {
@@ -31,10 +32,13 @@ const QuizPage = () => {
     fetchQuiz();
 
     const timer = setInterval(() => {
-      setTimeLeft(prevTime => {
+      setTimeLeft((prevTime) => {
         if (prevTime <= 0) {
           clearInterval(timer);
-          handleSubmit();
+          if (!isSubmitted) {  
+            setIsSubmitted(true)
+            return () => clearInterval(timer);
+          }
           return 0;
         }
         return prevTime - 1;
@@ -42,7 +46,7 @@ const QuizPage = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [id]);
+  }, [id, isSubmitted]);
 
   const handleOptionChange = (questionIndex, optionValue) => {
     if (!isSubmitted) {
@@ -54,6 +58,8 @@ const QuizPage = () => {
   };
 
   const handleSubmit = () => {
+    if (isSubmitted) return; // Prevent resubmission if already submitted
+
     let newScore = 0;
     quiz.questions.forEach((question, qIndex) => {
       const selectedOption = selectedOptions[qIndex];
@@ -62,7 +68,7 @@ const QuizPage = () => {
       }
     });
     setScore(newScore);
-    setIsSubmitted(true);
+    setIsSubmitted(true); // Mark quiz as submitted
   };
 
   if (!quiz) return <div><Link to='/'>Go to home</Link></div>;
@@ -73,6 +79,9 @@ const QuizPage = () => {
       <p className="text-gray-700 text-base mb-4">{quiz.description}</p>
       <div className="mb-4">
         <div className="text-lg mb-4">Time left: {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, '0')}</div>
+        <div className="text-lg mb-4">Total Number of Questions :{quiz.questions.length} </div>
+        
+
         {quiz.questions.map((question, qIndex) => (
           <div key={qIndex} className="mb-6 p-4 border rounded-lg shadow-lg bg-gray-50">
             <h2 className="text-xl font-semibold mb-2">Question {qIndex + 1}: {question.questionText}</h2>
@@ -109,6 +118,7 @@ const QuizPage = () => {
       >
         {isSubmitted ? 'Quiz Submitted' : 'Submit Quiz'}
       </button>
+      <Link to='/' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Go to Home</Link>
       <Modal
         isOpen={isSubmitted}
         onRequestClose={() => setIsSubmitted(false)}

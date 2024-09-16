@@ -1,6 +1,8 @@
 import React from 'react';
 import Layout from '../components/Layout';
+import { Link } from 'react-router-dom';
 const LearningPage = () => {
+ 
   return (
     <Layout>
   
@@ -10,8 +12,8 @@ const LearningPage = () => {
       <section className="bg-hero-pattern bg-cover bg-center py-20 text-center text-white">
         <div className="container mx-auto px-6">
           <h1 className="text-4xl font-bold">Expand Your Knowledge with Our Learning Resources</h1>
-          <p className="mt-4">Explore topics, study materials, and tips to excel in quizzes.</p>
-          <button className="mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">Start Learning</button>
+          <p className="mb-8 mt-4">Explore topics, study materials, and tips to excel in quizzes.</p>
+          <Link to='/ai' className="mt-4 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold ">Learn with AI *</Link>
         </div>
       </section>
 

@@ -11,6 +11,7 @@ const CreateQuizAdmin = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
+  const [featured,setFeatured] = useState(false);
   const [questions, setQuestions] = useState([
     { questionText: '', options: [{ text: '', isCorrect: false }], correctAnswer: '' },
   ]);
@@ -104,6 +105,7 @@ const CreateQuizAdmin = () => {
         category,
         questions,
         creator,
+        featured,
       }, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -115,6 +117,7 @@ const CreateQuizAdmin = () => {
         setTitle('');
         setDescription('');
         setCategory('');
+        setFeatured(false)
         setQuestions([{ questionText: '', options: [{ text: '', isCorrect: false }], correctAnswer: '' }]);
       }
       setLoader(false);
@@ -160,6 +163,17 @@ const CreateQuizAdmin = () => {
               required
             />
           </div>
+          <div className="mb-6 flex items-center gap-10">
+            <label className="block text-lg font-semibold text-gray-700 mb-2">Featured</label>
+            <input
+              type="checkbox"
+              checked={featured}
+              onChange={(e)=>setFeatured(e.target.checked) }
+              className=" px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+
           {questions.map((question, qIndex) => (
             <div key={qIndex} className="mb-8 border-b pb-6">
               <div className="flex justify-between items-center">
