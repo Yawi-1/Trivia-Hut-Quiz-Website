@@ -1,5 +1,5 @@
 import User from '../models/userModels.js';
-import bcrypt from 'bcrypt';
+import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 // User registration
@@ -17,8 +17,8 @@ const registerUser = async (req, res) => {
         }
 
         // Hash password
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
+        const salt = await bcryptjs.genSalt(10);
+        const hashedPassword = await bcryptjs.hash(password, salt);
 
         // Determine role based on email
         const role = adminEmails.includes(email) ? 'admin' : 'user';
