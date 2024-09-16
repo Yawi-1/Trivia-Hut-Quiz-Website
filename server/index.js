@@ -11,7 +11,10 @@ const app = express();
 const _dirname = path.resolve();
 
 app.use(express.json()); 
-app.use(cors({}));
+app.use(cors({
+    origin: 'https://trivia-hut-quiz-website.onrender.com',
+    credentials:true
+}));
 app.use('/api/users', userRouter);
 app.use('/api/quizzes', quizRouter); 
 app.use(express.static(path.join(_dirname,'/client/dist')))
