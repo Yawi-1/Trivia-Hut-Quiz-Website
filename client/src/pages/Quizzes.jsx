@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import QuizCard from '../components/QuizCard';
 import Layout from '../components/Layout';
 import axios from 'axios';
-import API_BASE_URL from '../config/config'
+import {API_BASE_URL} from '../config/config'
 
 const Quizzes = () => {
   const [quizzes, setQuizzes] = useState([]);
