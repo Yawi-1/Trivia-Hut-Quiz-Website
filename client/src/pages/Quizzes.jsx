@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import QuizCard from '../components/QuizCard';
 import Layout from '../components/Layout';
 import axios from 'axios';
+import API_BASE_URL from '../config/config'
 
 const Quizzes = () => {
   const [quizzes, setQuizzes] = useState([]);
@@ -11,7 +12,7 @@ const Quizzes = () => {
   const fetchQuizzes = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:3000/api/quizzes', {
+      const response = await axios.get(`${API_BASE_URL}/api/quizzes`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
