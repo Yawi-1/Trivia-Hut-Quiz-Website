@@ -1,1 +1,1 @@
-export const API_BASE_URL = 'https://trivia-hut-quiz-website.onrender.com/';
+export const API_BASE_URL = 'https://trivia-hut-quiz-website.onrender.com';
