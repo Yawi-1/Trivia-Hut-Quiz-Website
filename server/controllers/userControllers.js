@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 // User registration
 
-const adminEmails = ['yawimalik786@gmail.com','admin@gmail.com'];
+const adminEmails = ['yawimalik786@gmail.com','danishayoubalaie@gmail.com'];
 
 const registerUser = async (req, res) => {
     try {
