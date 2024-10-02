@@ -3,6 +3,7 @@ import QuizCard from '../components/QuizCard';
 import Layout from '../components/Layout';
 import axios from 'axios';
 import {API_BASE_URL} from '../config/config'
+import Loader from '../components/Loader'
 
 const Quizzes = () => {
   const [quizzes, setQuizzes] = useState([]);
@@ -54,7 +55,7 @@ const Quizzes = () => {
         </div>
 
 
-       { filteredQuizzes <=0 && <h1 className='text-4xl text-center'>Loading........</h1>}
+       { filteredQuizzes <=0 && <Loader/>}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
           {filteredQuizzes.map((quiz) => (
             <QuizCard

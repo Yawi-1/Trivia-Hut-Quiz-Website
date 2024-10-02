@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import Modal from 'react-modal';
+import {API_BASE_URL} from '../config/config'
 
 Modal.setAppElement('#root');
 
@@ -18,7 +19,7 @@ const QuizPage = () => {
     const fetchQuiz = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`http://localhost:3000/api/quizzes/${id}`, {
+        const response = await axios.get(`${API_BASE_URL}/api/quizzes/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

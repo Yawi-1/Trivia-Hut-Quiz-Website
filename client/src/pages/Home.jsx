@@ -24,7 +24,6 @@ const HomePage = () => {
 
   return (
     <Layout>
-      {/* Hero Section */}
       <section className="hero bg-blue-600 text-white text-center py-12 md:py-24">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl md:text-5xl my-4 font-extrabold ">Welcome to Trivia-Hut!</h1>
@@ -36,8 +35,6 @@ const HomePage = () => {
           </Link>
         </div>
       </section>
-
-      {/* Features Section */}
       <section className="features py-12 md:py-24 bg-gray-50">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">Features</h2>
@@ -57,8 +54,6 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-
-      {/* Featured Quizzes */}
       <section className="featured-quizzes py-12 md:py-24">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">Featured Quizzes</h2>
@@ -66,7 +61,7 @@ const HomePage = () => {
             {
               featuredQuizzes.map((quiz,index)=>{
                 return(
-                  <div className="quiz-card p-6 bg-white rounded-lg shadow-lg w-full md:w-1/3">
+                  <div key={index} className="quiz-card p-6 bg-white rounded-lg shadow-lg w-full md:w-1/3">
                   <h3 className="text-2xl font-semibold mb-4">{quiz.title}</h3>
                   <p>{quiz.description}</p>
                   <Link to={`/quizzes/${quiz._id}`}>
@@ -81,8 +76,6 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-
-      {/* How It Works */}
       <section className="how-it-works py-12 md:py-24 bg-gray-100">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">How It Works</h2>

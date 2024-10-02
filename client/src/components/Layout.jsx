@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from './Navbar'; // Adjust path as needed
-import Footer from './Footer'; // Adjust path as needed
+import Navbar from './Navbar'; 
+import Footer from './Footer';
 
 const Layout = ({ children }) => {
   return (

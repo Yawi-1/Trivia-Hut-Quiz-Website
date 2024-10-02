@@ -12,12 +12,13 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+
   const handleLinkClick = (path) => {
     setIsOpen(false); // Hide the menu
     navigate(path); // Navigate to the path
   };
 
-    const role = localStorage.getItem('role');
+    const role = 'admin';
   return (
     <nav className="bg-blue-600 fixed top-0 w-full z-10 shadow-lg">
       <div className="container mx-auto py-3 flex justify-between items-center px-8">
